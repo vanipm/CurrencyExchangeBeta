@@ -1,0 +1,103 @@
+﻿<div class="customers view indent">
+    <div class="container">
+        <header>
+            <h3>Currency Exchange</h3>
+        </header>
+       
+        <div class="container amountcontainer">
+            <div class="row pull-right">
+                <label>Amount </label>
+                <input class="input-sm" ng-model="orderAmount">
+            </div>
+        </div>
+
+        <div class="container">
+               <div class="row cardContainer show-hide-animation" data-ng-hide="listDisplayModeEnabled">
+                    <div class="col-sm-6 col-md-3" data-ng-class="cardAnimationClass"
+                            data-ng-repeat="currency in currencies">
+                            <div class="card">
+                                <div class="cardHeader">{{currency.currency}}</div>
+                                <div class="cardBody">
+                                    <div class="clearfix">
+                                        <div class="pull-left cardBodyLeft">
+                                            <a href="" class="btn-link" ng-click="addBidOrder(currency.bid, currency.currency)">
+                                                <div class="bidprice text-center">{{currency.bid}}</div>
+                                                <div class="bidlbl text-center">Bid</></div>
+                                            </a>
+                                        </div>
+                                        <div class="pull-right cardBodyRight">
+                                            <a href="" class="btn-link" ng-click="addAskOrder(currency.ask,currency.currency)">
+                                                <div class="askprice text-center">{{ currency.ask }}</div>
+                                                <div><label class="asklbl text-center">Ask</label></div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+               
+ 
+        </div>
+        <div class="container">
+            <div class="row show-hide-animation" data-ng-show="currencies.length == 0">
+                <div class="col-span-12">
+                    <h4>No Bids found</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h3>Transaction History</h3>
+            <table class="table table-hover table-condensed table-bordered ordersTable">
+                <thead>
+                    <tr>
+                        <th data-ng-click="setOrder('side')">Order</th>
+                        <th data-ng-click="setOrder('currency')">Currencies</th>
+                        <th data-ng-click="setOrder('amount')">Amount</th>
+                        <th data-ng-click="setOrder('currency')">Price</th>
+                        <th data-ng-click="setOrder('ordertime')">DateTime</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-hide="transactions || transactions.length > 0" class="error">
+                        <td colspan="5">
+                            <div class="text-center"><strong>No transactions found</strong></div>
+                        </td>
+                    </tr>
+                    <tr data-ng-repeat="order in transactions" class="repeat-animation {{order.side}}Order">
+                        <td>
+                            {{ order.side }}
+                        </td>
+                        <td>
+                            {{ order.currency  }}
+                        </td>
+                        <td>
+                            {{ order.amount }}
+                        </td>
+                        <td>
+                            {{ order.price | number : 4 }}
+                        </td>
+                        <td>
+                            {{ order.ordertime |  date:'MM/dd/yyyy HH:mm:ss' }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row show-hide-animation" data-ng-show="transactions.length > 0">
+            <div class="col-md-12">
+                <div data-pagination
+                        data-on-select-page="pageChanged(page)"
+                        data-total-items="totalRecords"
+                        data-page="currentPage"
+                        data-items-per-page="pageSize"
+                        data-boundary-links="true"
+                        class="pagination-sm"></div>
+                <h5>Showing {{ transactions.length }} of {{ transactions.length}} total transactionss</h5>
+            </div>
+        </div>
+                <br /><br /><br />
+     </div>
+</div>
+</div>

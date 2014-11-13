@@ -1,0 +1,35 @@
+﻿<div class="view">
+
+    <div class="container">
+        <div><h3>News</h3></div>
+        <!--<table class="table table-hover table-striped table-condensed table-bordered newsTable" data-ng-controller="AboutController">-->
+            <table class="table table-hover table-striped table-condensed table-bordered newsTable" data-ng-controller="AboutController">
+                <thead>
+                    <tr>
+                        <th class="col-xs-2 col-md-2" data-ng-click="">DateTime</th>
+                        <th class="col-xs-10 col-md-10" data-ng-click="">Title</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-hide="newsitems || newsitems.length > 0" class="error">
+                        <td colspan="5">
+                            <div class="text-center"><strong>No News Items found</strong></div>
+                        </td>
+                    </tr>
+                    <tr data-ng-repeat="news in newsitems" class="repeat-animation">
+                        <td class="col-xs-2 col-md-2">
+                            <a href="#/NewsDetails/{{news.date}}"  class="btn-link">{{ news.date }}</a>
+                        </td>
+                        <td class="col-xs-10 col-md-10">
+                            {{ news.title }}
+                        </td>
+
+                    </tr>
+
+                </tbody>
+            </table>
+    </div>
+
+</div>
+
+
